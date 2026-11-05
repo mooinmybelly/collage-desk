@@ -1,5 +1,7 @@
 # Collage Desk
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/33b7ba72-4f8c-49bf-a080-e9eaf4888e5d/deploy-status)](https://app.netlify.com/projects/collage-desk/deploys)
+
 A scrapbook-style notes site. Each page is a free canvas where you can drop notes, pictures, stickers, washi tape and punch cards, drag them anywhere, and layer them however you like. It opens with an envelope that slides out a sign-in card.
 
 **Live site:** https://collage-desk.netlify.app
@@ -33,12 +35,17 @@ A scrapbook-style notes site. Each page is a free canvas where you can drop note
 
 ### Files
 
+All files sit at the top of the repo:
+
 ```
 index.html            the whole app
+netlify.toml          tells Netlify to publish the files as they are
 supabase-setup.sql    database tables, privacy rules and picture storage
-env/                  envelope layers for the sign-in animation
-stickers/             images for the sticker drawer
-vendor/               the Supabase browser library (supabase-js 2.45.4)
+supabase.js           the Supabase browser library (supabase-js 2.45.4)
+591.supabase.js       part of the Supabase library
+back.webp, bg.png, flap.webp, paper.webp, pocket.webp, stars.webp
+                      envelope layers for the sign-in animation
+everything else .webp images for the sticker drawer
 ```
 
 ## Setting it up yourself
@@ -64,4 +71,4 @@ vendor/               the Supabase browser library (supabase-js 2.45.4)
 
 The sticker images, the envelope and background on the sign-in screen, and the reference palette came from Pinterest. They belong to their original creators and are used here for personal, non-commercial purposes only. Swap them for your own artwork before reusing this project publicly.
 
-The Supabase JavaScript library in `vendor/` is MIT licensed.
+The Supabase JavaScript library (`supabase.js`, `591.supabase.js`) is MIT licensed.

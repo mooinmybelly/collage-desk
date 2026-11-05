@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f3d6db">
 <title>Collage Desk</title>
-<link rel="icon" href="stickers/gingham-star.webp">
+<link rel="icon" href="gingham-star.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Caveat:wght@500;700&family=Courier+Prime:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap">
 <style>
@@ -201,14 +201,14 @@ body.focus .histbar{top:calc(12px + env(safe-area-inset-top,0px))}
 .me button:hover{background:var(--rose)}
 
 /* ---------- envelope stage: layers cut from the reference image, in its own pixel units ---------- */
-.stage{position:fixed;inset:0;z-index:200000;overflow:hidden;--s:.6;--tx:0px;--ty:0px;background-color:#f3d6db;background-image:url("env/bg.png");background-size:calc(1472px * var(--s)) calc(15px * var(--s));background-position:var(--tx) var(--ty);transition:opacity .6s ease}
+.stage{position:fixed;inset:0;z-index:200000;overflow:hidden;--s:.6;--tx:0px;--ty:0px;background-color:#f3d6db;background-image:url("bg.png");background-size:calc(1472px * var(--s)) calc(15px * var(--s));background-position:var(--tx) var(--ty);transition:opacity .6s ease}
 .stage.hidden{visibility:hidden;pointer-events:none}
 .stage.fading{opacity:0}
 .scene{position:absolute;left:0;top:0;width:736px;height:1308px;transform-origin:0 0;transform:translate(var(--tx),var(--ty)) scale(var(--s));perspective:1800px}
 .lay{position:absolute;display:block;pointer-events:none;user-select:none;-webkit-user-select:none;max-width:none}
 .e-back{left:75px;top:516px;z-index:1}
 .e-clip{position:absolute;left:75px;top:0;width:586px;height:1017px;overflow:hidden;z-index:2}
-.e-paper{position:absolute;left:85px;top:302px;width:419px;height:760px;background:url("env/paper.webp") 0 0/100% 100% no-repeat;transform:translateY(545px);transition:transform 1s cubic-bezier(.2,.75,.25,1)}
+.e-paper{position:absolute;left:85px;top:302px;width:419px;height:760px;background:url("paper.webp") 0 0/100% 100% no-repeat;transform:translateY(545px);transition:transform 1s cubic-bezier(.2,.75,.25,1)}
 .scene.out .e-paper{transform:none}
 .e-stars{left:-47px;top:-67px;z-index:3}
 .e-pocket{left:75px;top:560px;z-index:3}
@@ -281,10 +281,10 @@ body.focus .histbar{top:calc(12px + env(safe-area-inset-top,0px))}
 <div class="bar" id="bar" hidden></div>
 <div class="stage" id="stage">
   <div class="scene" id="scene">
-    <img class="lay e-flap" src="env/flap.webp" alt="" aria-hidden="true">
-    <img class="lay e-back" src="env/back.webp" alt="" aria-hidden="true">
+    <img class="lay e-flap" src="flap.webp" alt="" aria-hidden="true">
+    <img class="lay e-back" src="back.webp" alt="" aria-hidden="true">
     <div class="e-clip"><div class="e-paper">
-      <img class="lay e-stars" src="env/stars.webp" alt="" aria-hidden="true">
+      <img class="lay e-stars" src="stars.webp" alt="" aria-hidden="true">
       <h2 class="ptitle" id="ptitle">Collage Desk</h2>
       <form class="pform" id="pform">
         <div class="ptabs" role="tablist" aria-label="Sign in with"><button type="button" role="tab" id="tabEmail" class="on" aria-selected="true">Email</button><button type="button" role="tab" id="tabUser" aria-selected="false">Username</button></div>
@@ -296,13 +296,13 @@ body.focus .histbar{top:calc(12px + env(safe-area-inset-top,0px))}
         <button class="pswap" id="pout" type="button" hidden>Sign out</button>
       </form>
     </div></div>
-    <img class="lay e-pocket" src="env/pocket.webp" alt="" aria-hidden="true">
+    <img class="lay e-pocket" src="pocket.webp" alt="" aria-hidden="true">
     <p class="pnote" id="pnote"></p>
   </div>
 </div>
 <div class="toast" id="toast" hidden></div>
 
-<script src="vendor/supabase.js"></script>
+<script src="supabase.js"></script>
 <script>
 (() => {
 const $=id=>document.getElementById(id);
@@ -333,7 +333,7 @@ const LIB=[
   ['Paper & frames',[['pink-paper','Deckled paper',240],['postcard-back','Postcard',340],['clip-paper','Clipped paper',300],['lace-square','Lace square',260],['gift-tag','Gift tag',300],['oval-frame','Oval frame',240],['unicorn-stamp','Unicorn stamp',230],['rug','Rug',260]]],
   ['Little things',[['gingham-star','Gingham star',170],['button','Button',110],['butterfly-1','Butterfly',130],['butterfly-2','Butterfly',130],['butterfly-3','Butterfly',130],['butterfly-4','Butterfly',140],['disco-ball','Disco ball',150],['star-garland','Star garland',420],['pegasus','Pegasus',260],['lily','Lily',180],['flower-swirl','Flower swirl',170]]]
 ];
-const LIBMAP={};LIB.forEach(([,list])=>list.forEach(([k,l,w])=>LIBMAP[k]={src:'stickers/'+k+'.webp',label:l,w}));
+const LIBMAP={};LIB.forEach(([,list])=>list.forEach(([k,l,w])=>LIBMAP[k]={src:''+k+'.webp',label:l,w}));
 const JELLY=['star','heart','sparkle','flower','bow','circle'];
 let drawerOpen=false;
 let group=new Set(),marq=null;
@@ -610,7 +610,7 @@ function renderDrawer(){
   const mine=state.mine||[];
   const g=shelf('My stickers',mine.map(m=>thumb('mine:'+m.id,'My sticker',`<img src="${srcOf(m)}" alt="">`,()=>{state.mine=state.mine.filter(x=>x.id!==m.id);save();renderDrawer()})));
   if(!mine.length){const p=document.createElement('p');p.className='emptymine';p.textContent='Select any picture on the board and choose “Save as sticker” to keep it here. “Cut out” removes a white background first.';g.append(p)}
-  LIB.forEach(([title,list])=>shelf(title,list.map(([k,l])=>thumb(k,l,`<img src="stickers/${k}.webp" alt="" loading="lazy">`))));
+  LIB.forEach(([title,list])=>shelf(title,list.map(([k,l])=>thumb(k,l,`<img src="${k}.webp" alt="" loading="lazy">`))));
   shelf('Jelly shapes',JELLY.map(s=>{const lt=mix(P.butter.bg,'#ffffff',.5);return thumb('jelly:'+s,s[0].toUpperCase()+s.slice(1),`<svg viewBox="0 0 24 24"><path d="${SHAPES[s]}" fill="${['#F6E3A1','#E7B4B9','#D8D1F4','#E8F0A2','#FDE5E8','#E7B4B9'][JELLY.indexOf(s)]}" stroke="#2b222440" stroke-width=".6"/><ellipse cx="9" cy="8.6" rx="2.2" ry="1.1" fill="${lt}" opacity=".8"/></svg>`)}));
 }
 function aspectOf(src){return new Promise(res=>{const i=new Image();if(/^https?:/.test(src))i.crossOrigin='anonymous';i.onload=()=>res(i.naturalHeight/i.naturalWidth||1);i.onerror=()=>res(1);i.src=src})}
